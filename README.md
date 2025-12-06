@@ -1,7 +1,7 @@
 # DesktopLobby
 
 **让你的桌面"活"起来——与《碧蓝档案》中的学生相伴的每一天。**
-[预览](preview.PNG)
+![预览](./preview.PNG)
 
 DesktopLobby 是一款基于 Python 开发的桌面美化应用，灵感源自《碧蓝档案》的主界面大厅。它不仅将你喜爱的学生"值日员"带到桌面上，更通过智能对话与动态交互，为你带来真实而温暖的陪伴体验。告别原版固定的布局与台词，这里的一切由你定义：自由切换角色表情、随意调整位置与大小，更可突破预设对话的限制，借助 AI 与学生展开**轻松、自然、随心所欲**的日常聊天。
 
@@ -80,7 +80,7 @@ DesktopLobby 是一个完全由个人爱好者（我）开发和维护的业余�
 # DesktopLobby
 
 **Bring your desktop to life — everyday companionship with students from *Blue Archive*.**
-[PREVIEW](preview.PNG)
+![PREVIEW](./preview.PNG)
 
 DesktopLobby is a Python‑based desktop customization application inspired by the main lobby of *Blue Archive*. It brings your favorite student "duty officers" onto your desktop, offering not just a visual presence but also intelligent conversation and dynamic interaction for a genuinely warm companion experience. Move beyond the original game's fixed layouts and lines — here everything is yours to define: freely switch character expressions, adjust position and size at will, and go beyond preset dialogues to have **casual, natural, and free‑flowing** daily chats with students powered by AI.
 
