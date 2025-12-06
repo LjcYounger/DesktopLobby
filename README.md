@@ -137,7 +137,7 @@ After startup, the program automatically attempts to open a Socket listener on `
 1.  **Multi‑character Interaction** – Allow students on the desktop to talk with each other, creating a more lively scene atmosphere.
 2.  **Spine Character Support** – Plan to introduce full Spine character support by embedding an HTML engine (e.g., using spine‑ts runtime), overcoming current technical limitations.
 
-💖 Project Status
+## 💖 Project Status
 
 DesktopLobby is a hobby project developed and maintained entirely by individual enthusiast(me). Due to limited developer time and resources, updates may not be frequent, and features may not be as polished as commercial projects. However, I am committed to maintaining this project with care, aiming to create a cozy corner of companionship on your desktop.
 
