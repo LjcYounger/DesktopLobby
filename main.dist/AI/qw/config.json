@@ -1,0 +1,6 @@
+{
+	"introduction": "llama.cpp 是一个高性能本地AI推理框架，支持在无GPU的设备上运行大模型，\n通过量化技术实现低资源消耗，提供私密、高效的文本生成与对话能力。\n文件格式:.gguf\n文件可从各类模型网站获取(例如modelscope)",
+	"parameters": {
+		"PATH": {"secret": false}
+		}
+}

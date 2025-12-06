@@ -1,0 +1,4 @@
+{
+#The proportion of the dialog box from the original size to the screen(1600x900)
+"k": 0.5523
+}

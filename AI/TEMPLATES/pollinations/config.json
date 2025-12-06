@@ -1,0 +1,6 @@
+{
+	"introduction": "Pollinations API 支持聊天功能，可实现简单对话交互，\n免费开放且国内网络直连，使用便捷。\n官网：<https://pollinations.ai>/\nAPI获取：<https://auth.pollinations.ai/>",
+	"parameters": {
+		"API_KEY": {"secret": true}
+		}
+}

@@ -1,0 +1,34 @@
+{
+#TopLeft
+"01": [529, 114],
+"02": [529, 112],
+"03": [530, 112],
+"04": [536, 115],
+"05": [529, 116],
+"06": [532, 122],
+"07": [531, 121],
+"08": [528, 116],
+"de": [529, 114],
+"ey": [533, 114],
+
+#TopLeft
+"Hair_Cover_01": [534, 111],
+
+#TopLeft
+"halo": [557, 43],
+"dialogBoxPos": [891, 344],
+"characterPos": [110, 76],
+"blinkingTime": 0.01,
+"deltaBlinkTime": 4,
+"defaultEmotionIndex": 0,
+"emotionWhenFailingIndex": 5,
+"defaultBlinkEyes": true,
+"defaultDialog": true,
+"login": [["login_1"], ["login_2"]], 
+"lobby": 
+[["lobby_11", "lobby_12"], 
+["lobby_2|UIAni_SC_Char_Shake_1"], 
+["lobby_31", "lobby_32"], 
+["lobby_4"], 
+["lobby_5"]]
+}
