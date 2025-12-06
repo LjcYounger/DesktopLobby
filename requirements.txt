@@ -1,10 +1,15 @@
-openai==2.2.0
-pyside6==6.1.3
-pillow==10.4.0
-pygame==2.6.1
-peewee==3.18.3
-setuptools==75.1.0
-numpy==1.24.4
-scipy==1.10.1
-keyring==25.5.0
-cryptography==46.0.3
+# necessary
+PySide6>=6.0.0
+peewee>=3.0.0
+Pillow>=9.0.0
+pygame>=2.0.0
+ruamel.yaml>=0.17.0
+keyring>=23.0.0
+cryptography>=36.0.0
+numpy>=1.20.0
+scipy>=1.7.0
+pywin32>=300; sys_platform == 'win32'
+
+# alternative
+# openai>=1.0.0
+# llama-cpp-python>=0.2.0

@@ -1,5 +1,6 @@
 import win32job
 import ctypes
+import time
 from ctypes import wintypes
 
 PROCESS_ALL_ACCESS = 0x1F0FFF
@@ -13,7 +14,7 @@ def get_process_handle(pid):
 
 
 def create_job_object():
-    job = win32job.CreateJobObject(None, "DesktopLobbyJob")
+    job = win32job.CreateJobObject(None, str(int(time.time())))
     extended_info = win32job.QueryInformationJobObject(job, win32job.JobObjectExtendedLimitInformation)
 
     extended_info['BasicLimitInformation']['LimitFlags'] = win32job.JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
