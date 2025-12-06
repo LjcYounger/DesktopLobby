@@ -61,6 +61,18 @@ DesktopLobby 提供了友好的图形化配置界面，你可以直接在设置�
 1.  **多角色互动**：让桌面上的学生们能够彼此交谈，营造更生动的场景氛围。
 2.  **Spine 角色支持**：计划通过内嵌 HTML 引擎（如使用 spine-ts 运行时）实现对 Spine 角色的完整支持，突破当前的技术限制。
 
+## 💖 关于项目状态
+
+DesktopLobby 是一个完全由个人爱好者（我）开发和维护的业余项目。由于开发者精力有限，更新可能会不太频繁，功能实现也可能不如商业项目完善。但我承诺会用心维护这个项目，让它成为大家在桌面上温馨陪伴的一角。
+
+如果你喜欢这个项目，欢迎分享给更多人，或为项目贡献代码与想法。每一位用户的关注与支持，都是这个项目继续前进的最大动力！
+
+## 📄 许可证
+此项目采用MIT许可证，可自由使用和分发。
+
+## 🤝 贡献与反馈
+如果您有想法、发现bug或想要贡献代码，请随时开启一个Issue或提交Pull Request！让我们一起构建更好的桌面陪伴体验。
+
 ---
 
 <a id="english-version"></a >
@@ -124,6 +136,12 @@ After startup, the program automatically attempts to open a Socket listener on `
 
 1.  **Multi‑character Interaction** – Allow students on the desktop to talk with each other, creating a more lively scene atmosphere.
 2.  **Spine Character Support** – Plan to introduce full Spine character support by embedding an HTML engine (e.g., using spine‑ts runtime), overcoming current technical limitations.
+
+💖 Project Status
+
+DesktopLobby is a hobby project developed and maintained entirely by individual enthusiast(me). Due to limited developer time and resources, updates may not be frequent, and features may not be as polished as commercial projects. However, I am committed to maintaining this project with care, aiming to create a cozy corner of companionship on your desktop.
+
+If you enjoy this project, feel free to share it with others or contribute your code and ideas. Every user's attention and support is the greatest motivation for this project to keep moving forward!
 
 ## 📄 License
 This project is licensed under the MIT License. You are welcome to use and contribute freely.
