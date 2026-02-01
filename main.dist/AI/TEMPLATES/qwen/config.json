@@ -1,7 +1,0 @@
-{
-	"introduction": "百炼Qwen API 专为聊天场景优化，支持流畅的多轮对话与上下文理解，提供稳定、低延迟的文本生成。\n模型列表：<https://help.aliyun.com/zh/model-studio/getting-started/models>\n获取API_KEY：<https://help.aliyun.com/zh/model-studio/get-api-key>",
-	"parameters": {
-		"API_KEY": {"secret": true},
-		"MODEL": {"secret": false}
-		}
-}

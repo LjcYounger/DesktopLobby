@@ -1,7 +1,7 @@
 #from database.database import *
 from AI.AI_control import AI
 
-a=AI('qwen4b', {'NAME': "qwen4b", "PATH": "AI/qwen/qwen1_5-4b-chat-q4_k_m.gguf"})
+a=AI('4', {'NAME': "4", "PATH": "D:/gguf_models/qwen1_5-4b-chat-q4_k_m.gguf"})
 #db_delete_conversation_record(0, character='mi')
 while True:
     x=input()

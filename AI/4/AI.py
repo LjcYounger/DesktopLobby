@@ -24,8 +24,8 @@ else:
                     n_ctx=4096,  # 上下文长度
                     n_threads=3,
                     seed=int(time.time()),
-                    f16_kv=True,  # 使用半精度加速
-                    verbose=False,
+                    f16_kv=True  # 使用半精度加速
+                    #verbose=False,
                 )
             except Exception as e:
                 self.llm=None
