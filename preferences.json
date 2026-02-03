@@ -15,7 +15,7 @@
 "fastCloseButton": true,
 "fastCloseButtonBorder": [0, 39],
 
-"debugWindow": true,
+"debugWindow": false,
 ###Main Settings###
 "language": "zh_CN",
 #path, size, (type, italic)(alternative)

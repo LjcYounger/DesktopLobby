@@ -44,7 +44,6 @@ class ImageWindow(QMainWindow):
         self.character_config.pictures = convert_PIL_pictures_to_QPixmap(self.character_config.pictures)
 
         self.image0 = self.character_config.pictures[self.settings_parameters.emotion]
-
         self.haloImageP = self.character_config.pictures['halo']
 
         self.halo = QLabel('halo', self)
@@ -124,16 +123,19 @@ class ImageWindow(QMainWindow):
     def settings_signal_received(self, key, value):
         if hasattr(self.settings_parameters, key):
             setattr(self.settings_parameters, key, value)
-
         if key == 'emotion':
             self.update(value)
         elif key == 'move':
             self.settingwindow.dialogCheck.setChecked(not self.settings_parameters.move)
             self.settingwindow.dialogCheck.setCheckable(not self.settings_parameters.move)
-        elif key == 'size':
-            self.sizeChange(self.settings_parameters.size)
+        elif key == 'size_preview' or key == 'size_final':
+            setattr(self.settings_parameters, 'size', value)
+
+            precise = False if key == 'size_preview' else True
+            self.sizeChange(self.settings_parameters.size, precise=precise)
             self.dialogboxwindow.sizeposChange(
                 self.settings_parameters.size / self.character_config.settings.get('k', 1))
+            
         elif key == 'top_level':
             if value:  # True
                 # 将窗口置于顶层
@@ -289,14 +291,43 @@ class ImageWindow(QMainWindow):
         self.animation_player.play()
 
 
-    def sizeChange(self, data):
+    def sizeChange(self, data, precise=True):
         self.settings_parameters.size = data * self.character_config.settings.get('k', 1)  # GLOBAL_CONFIG.ZOOM_SCALE
-        fixedBody = self.image0.scaled(
-            *(int(x * self.settings_parameters.size) for x in (self.image0.width(), self.image0.height())),
-            Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
-        fixedHalo = self.haloImageP.scaled(
-            *(int(x * self.settings_parameters.size) for x in (self.haloImageP.width(), self.haloImageP.height())),
-            Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        
+        if precise:
+            # 高质量插值处理 - 使用ImageQt的转换函数
+            from PIL import Image
+            from functions.ImageQt import fromqimage, toqpixmap
+            
+            # 直接使用ImageQt的fromqimage函数转换QImage到PIL Image
+            body_pil = fromqimage(self.image0.toImage())
+            halo_pil = fromqimage(self.haloImageP.toImage())
+            
+            # 使用LANCZOS高质量插值缩放
+            target_body_size = (
+                max(1, int(body_pil.width * self.settings_parameters.size)),
+                max(1, int(body_pil.height * self.settings_parameters.size))
+            )
+            target_halo_size = (
+                max(1, int(halo_pil.width * self.settings_parameters.size)),
+                max(1, int(halo_pil.height * self.settings_parameters.size))
+            )
+            
+            resized_body = body_pil.resize(target_body_size, Image.Resampling.LANCZOS)
+            resized_halo = halo_pil.resize(target_halo_size, Image.Resampling.LANCZOS)
+            
+            # 转换回QPixmap
+            fixedBody = toqpixmap(resized_body)
+            fixedHalo = toqpixmap(resized_halo)
+        else:
+            # 快速预览缩放 - 使用Qt原生方法
+            fixedBody = self.image0.scaled(
+                *(int(x * self.settings_parameters.size) for x in (self.image0.width(), self.image0.height())),
+                Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
+            fixedHalo = self.haloImageP.scaled(
+                *(int(x * self.settings_parameters.size) for x in (self.haloImageP.width(), self.haloImageP.height())),
+                Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        
         self.resize(self.size0[0] * self.settings_parameters.size, self.size0[1] * self.settings_parameters.size)
         self.halo.setPixmap(fixedHalo)
         self.halo.setFixedSize(fixedHalo.width(), fixedHalo.height())

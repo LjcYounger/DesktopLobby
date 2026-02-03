@@ -123,7 +123,8 @@ class SettingsWindow(QDialog):
         levelCheck.stateChanged.connect(lambda state: self.send_signal('top_level', state))
 
         self.Sslider.valueChanged.connect(self.update_numbox)
-        self.numbox.textChanged.connect(self.update_Sslider)
+        self.Sslider.sliderReleased.connect(self.send_size_final)
+        self.numbox.textChanged.connect(self.update_Sslider_and_send_final)
 
         self.Bslider.valueChanged.connect(lambda value: self.send_signal('bgm_volume', value/100))
         self.Vslider.valueChanged.connect(lambda value: self.send_signal('voice_volume', value/100))
@@ -135,7 +136,8 @@ class SettingsWindow(QDialog):
         self.timer=QTimer(self)
         self.timer.timeout.connect(self.update_canchange)
         self.canchange=True
-        self.timer.start(20)
+        self.timer.start(30)
+        
 
     def send_signal(self, key: str, value):
         signal_bus.settings_signal.emit(key, value)
@@ -144,9 +146,13 @@ class SettingsWindow(QDialog):
 
     def update_numbox(self, value):
         double_value = value / 10000.0
+        # 断开数值框信号连接，避免循环触发
+        self.numbox.textChanged.disconnect()
         self.numbox.setText(str(double_value))
+        # 重新连接信号
+        self.numbox.textChanged.connect(self.update_Sslider_and_send_final)
         if self.canchange:
-            self.send_signal('size', double_value)
+            self.send_signal('size_preview', double_value)
             self.canchange=False
 
     def update_Sslider(self, value):
@@ -154,8 +160,35 @@ class SettingsWindow(QDialog):
             try:
                 fvalue=min(max(float(value), 0.1), 3.0)
                 int_value = int(fvalue * 10000)
+                # 断开滑动条信号连接，避免循环触发
+                self.Sslider.valueChanged.disconnect()
                 self.Sslider.setValue(int_value)
+                # 重新连接信号
+                self.Sslider.valueChanged.connect(self.update_numbox)
                 self.numbox.setText(str(fvalue))
                 #self.Sizecommunicator.data_signal.emit(fvalue)
             except ValueError:
                 pass
+    
+    # 新增：处理数字输入框修改并发送最终信号
+    def update_Sslider_and_send_final(self, value):
+        if self.canchange:
+            try:
+                fvalue=min(max(float(value), 0.1), 3.0)
+                int_value = int(fvalue * 10000)
+                # 断开滑动条信号连接，避免循环触发
+                self.Sslider.valueChanged.disconnect()
+                self.Sslider.setValue(int_value)
+                # 重新连接信号
+                self.Sslider.valueChanged.connect(self.update_numbox)
+                self.numbox.setText(str(fvalue))
+                self.send_signal('size_final', fvalue)  # 发送最终信号
+            except ValueError:
+                pass
+    
+    # 新增：发送尺寸最终信号
+    def send_size_final(self):
+        value = self.Sslider.value() / 10000.0
+        self.send_signal('size_final', value)
+    
+    # 移除了 stop_preview_timer 和 restart_preview_timer 方法
