@@ -12,8 +12,7 @@ def load_anim(path):
 
 
 class AnimationPlayer:
-    def __init__(self, anim_name, stop_time=None):
-        path = f"AnimationClip/{anim_name}.anim"
+    def __init__(self, path, stop_time=None):
         self.anim, self.stop_time = load_anim(path)
         if stop_time:
             self.stop_time = stop_time
@@ -22,7 +21,7 @@ class AnimationPlayer:
              nowtime,
              path='general',
              timeReverse=False,
-             Eunit='x',
+             Eunit='z',
              Runit='w',
              Punit=('x', 'y'),
              Preverse=(False, False),
@@ -117,9 +116,6 @@ class AnimationPlayer:
         return dic, False
 
 if __name__ == '__main__':
-    import os
-
-    os.chdir(r'D:\Projects\DesktopLobby')
-    an = AnimationPlayer('UIAni_SC_Char_Shake_2')
-    dic = an.play_frame(0.2)
+    an = AnimationPlayer('examples/AnimationClip/T.anim')
+    dic = an.play_frame(0.83, path='general')
     print(dic)
