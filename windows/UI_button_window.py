@@ -15,7 +15,7 @@ class UIButtonWindow(QDialog):
         self.setWindowFlags(Qt.FramelessWindowHint|Qt.ToolTip)
         self.setAttribute(Qt.WA_TranslucentBackground, True)
 
-        self.buttonAnim=AnimationPlayer("UIAni_Button_Scale")
+        self.buttonAnim=AnimationPlayer("AnimationClip/UIAni_Button_Scale.anim")
         self.canChange=True
         
         self.playable=False

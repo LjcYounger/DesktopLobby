@@ -23,6 +23,7 @@ if current_process().name == 'MainProcess' and __name__ == '__main__':
         from PySide6.QtCore import QThread
 
         import signal
+        import os
 
         from getResources import GLOBAL_CONFIG, global_variables, getCurrentCharacter, getDialogBoxContent, loadFont, setCurrentCharacter
         from resource_loader import getCharacterInf
@@ -54,7 +55,7 @@ if current_process().name == 'MainProcess' and __name__ == '__main__':
 
         anims = {}
         for animName in GLOBAL_CONFIG.PREFERENCES['animNames']:
-            anims[animName] = AnimationPlayer(animName)
+            anims[animName] = AnimationPlayer(os.path.join('AnimationClip', animName + '.anim'))
             LoadingWindowControl.messageLoadingWindow(f"Animation:{animName}")
         GLOBAL_CONFIG.ANIMS = anims
         LoadingWindowControl.messageLoadingWindow("Animation initialization completed.")

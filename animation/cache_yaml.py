@@ -59,7 +59,6 @@ def load_yaml(path: str, cache=True):
     """加载并缓存yaml，使用SHA256验证文件一致性"""
     # 构建缓存json路径
     json_path = os.path.join(temp_folder_path, path.rsplit('.', 1)[0] + '.json')
-
     # 计算源文件的SHA256
     source_sha256 = _get_file_sha256(path)
     if source_sha256 is None:

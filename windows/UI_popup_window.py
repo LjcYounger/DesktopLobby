@@ -18,8 +18,8 @@ class UI_PopupWindow(QWidget):
             self.darkScreenWindow = UI_DarkScreenWindow()
             self.darkScreenWindow.show()
 
-    def play_anim(self, anim='UIAni_Popup_System', **kwargs):
-        if anim == 'UIAni_Popup_System':
+    def play_anim(self, anim='AnimationClip/UIAni_Popup_System.anim', **kwargs):
+        if anim == 'AnimationClip/UIAni_Popup_System.anim':
             kwargs.setdefault('path', 'Center/Popup')
             kwargs.setdefault('Pratio', (1, 0.5))
 
