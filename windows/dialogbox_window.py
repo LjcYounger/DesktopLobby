@@ -4,6 +4,7 @@ from custom_QDialog import CustomQDialog as QDialog
 import functions.ImageQt
 import pygame.mixer as mixer
 import time
+import os
 from getResources import PREFERENCES
 from windows.functions import setopacity
 from audios.sound import load_audio_file
@@ -99,7 +100,7 @@ class DialogBoxWindow(QDialog):
         self.fixedupdate.timeout.connect(self.frameUpdate)
         self.show()
         if self.aniName:
-            signal_bus.dialog_anim_signal.emit(self.aniName)
+            signal_bus.dialog_anim_signal.emit(os.path.join('AnimationClip', self.aniName + '.anim'))
         self.fixedupdate.start(1000 / 30)
 
     def frameUpdate(self, fadeIn=0.6, fadeOut=0.6):

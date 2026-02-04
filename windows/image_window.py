@@ -160,6 +160,9 @@ class ImageWindow(QMainWindow):
         elif key == 'character':
             self.characterChanged(value)
 
+        elif key == 'text':  # value: Dict['content_list': List[str], 'emotion': str]
+            self.AI_generate(value)
+
         # Custom
         elif key == 'terminate':
             signal_bus.close_signal.emit()

@@ -43,3 +43,26 @@ class SocketListener(QThread):
             print("[WARNING]Socket listener stopped by user.")
         else:
             print("[ERROR]All ports from 10000 to 10009 failed.")
+
+
+
+# other
+class SocketSender:
+    def __init__(self, port, address='localhost'):
+        self.sock = None
+        try:
+            self.sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.sock.connect(('localhost', address))
+        except Exception as e:
+            print(e)
+
+    def send(self, message):
+        if self.sock:
+            try:
+                self.sock.sendall(message)
+            except Exception as e:
+                print(e)
+    def close(self):
+        if self.sock:
+            self.sock.close()
+            

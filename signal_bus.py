@@ -2,7 +2,7 @@ from PySide6.QtCore import QObject, Signal
 
 
 class SignalBus(QObject):
-    settings_signal = Signal(str, object)  # key, value
+    settings_signal = Signal(str, object)  # key, value  # socket_signal
     UI_windows_signal = Signal(str, object)  # key, value
     AI_settings_signal = Signal(str, str, object)  # ori_name, new_name, inf_dict
     dialog_anim_signal = Signal(str)  # ani_name
