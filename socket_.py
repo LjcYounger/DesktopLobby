@@ -1,11 +1,12 @@
 from PySide6.QtCore import QThread, Signal
 import socket
 import time
+from json import loads
 
 class SocketListener(QThread):
-    def __init__(self, comm):
+    def __init__(self, signal: Signal):
         super().__init__()
-        self.comm = comm
+        self.signal = signal
         self.address = 10000
         self.running = True
 
@@ -24,13 +25,13 @@ class SocketListener(QThread):
                         conn, addr = sock.accept()  # 这个 accept 也会受 timeout 控制
                         data = conn.recv(1024)
                         if data:
-                            message = data.decode().strip()
-                            self.comm.data_signal.emit(message)
+                            message = loads(data.decode())
+                            self.signal.emit(*message)
                         conn.close()
                     except socket.timeout:
                         continue  # 超时，继续检查 self.running
                     except Exception as e:
-                        print("[ERROR]Socket Accept Error: {e}")
+                        print(f"[ERROR]Socket Accept Error: {e}")
                         break  # 出错跳出内层循环，尝试下一个端口
 
             except Exception as e:
@@ -48,20 +49,24 @@ class SocketListener(QThread):
 
 # other
 class SocketSender:
-    def __init__(self, port, address='localhost'):
+    def __init__(self, port: int, address='localhost'):
         self.sock = None
         try:
             self.sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.sock.connect(('localhost', address))
+            self.sock.connect((address, port))
         except Exception as e:
-            print(e)
+            print(f"[ERROR]Socket Connecting Error: {e}")
 
-    def send(self, message):
+    def send(self, message: str):
+        """
+        Format: List[key: str, value: str]
+        """
+        from json import dumps
         if self.sock:
             try:
-                self.sock.sendall(message)
+                self.sock.sendall(dumps(message).encode())
             except Exception as e:
-                print(e)
+                print(f"[ERROR]Socket Sending Error: {e}")
     def close(self):
         if self.sock:
             self.sock.close()

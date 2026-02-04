@@ -216,6 +216,7 @@ class ImageWindow(QMainWindow):
 
         # print(self.fps())
 
+    #废弃函数
     def signalReceived(self, message):
         """接收到socket信号时的反应"""
 
