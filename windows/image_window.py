@@ -121,6 +121,7 @@ class ImageWindow(QMainWindow):
     ######################################
     # 信号槽函数
     def settings_signal_received(self, key, value):
+
         if hasattr(self.settings_parameters, key):
             setattr(self.settings_parameters, key, value)
         if key == 'emotion':

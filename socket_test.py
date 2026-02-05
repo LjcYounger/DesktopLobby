@@ -8,6 +8,8 @@ ss.send(message)
 
 time.sleep(2)
 
-ss.send(message)
+change = ['size_final', 2]
+
+ss.send(change)
 
 ss.close()
