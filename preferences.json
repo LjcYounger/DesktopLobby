@@ -26,7 +26,7 @@
 #The scaling ratio of the character from the original image to the screen
 "zoomScale": 1.1962,
 
-"socketAddress": "localhost",
+"socketAddress": "192.168.0.103",
 
 ###Character Settings###
 "defaultOverallCharacterSize": null,
