@@ -146,7 +146,7 @@ if current_process().name == 'MainProcess' and __name__ == '__main__':
         
         try:
             from socket_ import SocketListener
-            socketThread = SocketListener(signal_bus.settings_signal)
+            socketThread = SocketListener(signal_bus.settings_signal, address=GLOBAL_CONFIG.PREFERENCES["socketAddress"])
             socketThread.start()
             global_variables.socket_thread = socketThread
         except Exception as e:
