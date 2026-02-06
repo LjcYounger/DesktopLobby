@@ -8,3 +8,4 @@ dist/
 build/
 lobbies/
 DesktopLobby.py
+spine-webcomponents.js
