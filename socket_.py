@@ -6,6 +6,7 @@ from json import loads
 class SocketListener(QThread):
     def __init__(self, signal: Signal, address='localhost'):
         super().__init__()
+
         self.signal = signal
         self.address = address
         self.port = 10000
@@ -29,6 +30,7 @@ class SocketListener(QThread):
                             if not data:
                                 break  # 如果没有数据，跳出内层循环
                             message = loads(data.decode())
+                            print(f"[DEBUG]Socket Received: {message}")
                             self.signal.emit(*message)
                     except socket.timeout:
                         continue  # 超时，继续检查 self.running
