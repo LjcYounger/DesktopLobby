@@ -59,7 +59,7 @@ if current_process().name == 'MainProcess' and __name__ == '__main__':
             LoadingWindowControl.messageLoadingWindow(f"Animation:{animName}")
         GLOBAL_CONFIG.ANIMS = anims
         LoadingWindowControl.messageLoadingWindow("Animation initialization completed.")
-        current_AI = AI_thread = None
+        current_AI = None
 
 
         def init_AI(AI_name, inf_dict):
@@ -67,16 +67,26 @@ if current_process().name == 'MainProcess' and __name__ == '__main__':
                 try:
                     if not global_variables.current_AI:
                         global_variables.current_AI = AI(AI_name, inf_dict)
-                        global_variables.AI_thread = QThread()
-                        global_variables.current_AI.moveToThread(global_variables.AI_thread)
+                        # 连接初始化完成信号
+                        global_variables.current_AI.initialization_finished.connect(on_AI_ready)
+                        # 开始异步初始化
+                        global_variables.current_AI.start_initialization()
                     else:
-                        global_variables.AI_thread.quit()
-                        global_variables.AI_thread.wait()
+                        # 如果已有AI实例，先清理旧的
+                        if hasattr(global_variables.current_AI, 'init_thread'):
+                            global_variables.current_AI.init_thread.quit()
+                            global_variables.current_AI.init_thread.wait()
                         global_variables.current_AI = AI(AI_name, inf_dict)
-                        global_variables.AI_thread = QThread()
-                        global_variables.current_AI.moveToThread(AI_thread)
+                        global_variables.current_AI.initialization_finished.connect(on_AI_ready)
+                        global_variables.current_AI.start_initialization()
                 except Exception as e:
                     print(f"[ERROR]AI Error: {e}")
+
+        def on_AI_ready():
+            """AI初始化完成后的回调"""
+            print("[INFO]AI is ready for use!")
+            # 可以在这里更新UI状态，比如启用聊天按钮等
+            signal_bus.AI_started_signal.emit()
 
         signal_bus.AI_start_signal.connect(init_AI)
 

@@ -247,8 +247,13 @@ class ImageWindow(QMainWindow):
     # AI函数
 
     def start_AI_generate(self, data: str):
+        # 检查AI是否已初始化完成
+        if not global_variables.current_AI or not global_variables.current_AI.is_initialized:
+            print("[WARNING]AI not ready yet, please wait for initialization...")
+            # 可以显示提示信息给用户
+            return
+            
         if self.AI_firsttime:
-            global_variables.AI_thread.start()
             self.AI_firsttime = False
         exap = list(self.character_config.dialogBoxContent.values())[0]
         emo = next((s for s in self.character_config.emotions if s.startswith(exap[1])), None).split('_')[-1]

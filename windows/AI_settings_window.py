@@ -39,21 +39,21 @@ class AISettingsWindow(QDialog):
 
         l1.addStretch()
 
-        start_button = QPushButton()
-        start_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Start AI", ""))
-        l1.addWidget(start_button)
+        self.start_button = QPushButton()
+        self.start_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Start AI", ""))
+        l1.addWidget(self.start_button)
 
-        key_add_button = QPushButton()
-        key_add_button.setText(GLOBAL_CONFIG.LANGUAGE.get('Add', ""))
-        l1.addWidget(key_add_button)
+        self.key_add_button = QPushButton()
+        self.key_add_button.setText(GLOBAL_CONFIG.LANGUAGE.get('Add', ""))
+        l1.addWidget(self.key_add_button)
 
-        key_edit_button = QPushButton()
-        key_edit_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Edit", ""))
-        l1.addWidget(key_edit_button)
+        self.key_edit_button = QPushButton()
+        self.key_edit_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Edit", ""))
+        l1.addWidget(self.key_edit_button)
 
-        key_delete_button = QPushButton()
-        key_delete_button.setText(GLOBAL_CONFIG.LANGUAGE.get('Delete', ""))
-        l1.addWidget(key_delete_button)
+        self.key_delete_button = QPushButton()
+        self.key_delete_button.setText(GLOBAL_CONFIG.LANGUAGE.get('Delete', ""))
+        l1.addWidget(self.key_delete_button)
 
         layout.addLayout(l1)
 
@@ -80,15 +80,15 @@ class AISettingsWindow(QDialog):
 
         l21.addSpacing(32)
 
-        message1 = QLabel()
-        message1.setText(GLOBAL_CONFIG.LANGUAGE.get("<-Using", ""))
-        l21.addWidget(message1)
+        self.message1 = QLabel()
+        self.message1.setText(GLOBAL_CONFIG.LANGUAGE.get("<-Using", ""))
+        l21.addWidget(self.message1)
 
         l21.addStretch()
 
-        key_change_button = QPushButton()
-        key_change_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Change", ""))
-        l21.addWidget(key_change_button)
+        self.key_change_button = QPushButton()
+        self.key_change_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Change", ""))
+        l21.addWidget(self.key_change_button)
 
         l21.addStretch()
 
@@ -102,9 +102,9 @@ class AISettingsWindow(QDialog):
         line.setLineWidth(1)
         layout.addWidget(line)
 
-        message2 = QLabel()
-        message2.setText(GLOBAL_CONFIG.LANGUAGE.get("Current Character Settings", ""))
-        layout.addWidget(message2)
+        self.message2 = QLabel()
+        self.message2.setText(GLOBAL_CONFIG.LANGUAGE.get("Current Character Settings", ""))
+        layout.addWidget(self.message2)
 
         l3 = QHBoxLayout()
 
@@ -112,54 +112,55 @@ class AISettingsWindow(QDialog):
         #OTDcheck.setChecked(False)
         #l3.addWidget(OTDcheck)
 
-        SDRcheck = QCheckBox(GLOBAL_CONFIG.LANGUAGE.get("Save Dialog Record", ""), self)
-        SDRcheck.setChecked(True)
-        l3.addWidget(SDRcheck)
+        self.SDRcheck = QCheckBox(GLOBAL_CONFIG.LANGUAGE.get("Save Dialog Record", ""), self)
+        self.SDRcheck.setChecked(True)
+        l3.addWidget(self.SDRcheck)
 
         layout.addLayout(l3)
 
         l5 = QHBoxLayout()
 
-        message5 = QLabel()
-        message5.setText(GLOBAL_CONFIG.LANGUAGE.get("Clean Dialog Record Before", ""))
-        l5.addWidget(message5)
+        self.message5 = QLabel()
+        self.message5.setText(GLOBAL_CONFIG.LANGUAGE.get("Clean Dialog Record Before", ""))
+        l5.addWidget(self.message5)
 
-        CDRint = QSpinBox()
-        CDRint.setMinimum(0)
-        CDRint.setValue(30)
-        l5.addWidget(CDRint)
+        self.CDRint = QSpinBox()
+        self.CDRint.setMinimum(0)
+        self.CDRint.setValue(30)
+        l5.addWidget(self.CDRint)
 
-        message6 = QLabel()
-        message6.setText(GLOBAL_CONFIG.LANGUAGE.get("Days (0->clear)", ""))
-        l5.addWidget(message6)
+        self.message6 = QLabel()
+        self.message6.setText(GLOBAL_CONFIG.LANGUAGE.get("Days (0->clear)", ""))
+        l5.addWidget(self.message6)
 
-        CDR_button = QPushButton()
-        CDR_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Confirm", ""))
-        l5.addWidget(CDR_button)
+        self.CDR_button = QPushButton()
+        self.CDR_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Confirm", ""))
+        l5.addWidget(self.CDR_button)
 
         layout.addLayout(l5)
 
         l6 = QHBoxLayout()
 
-        RCI_button = QPushButton()
-        RCI_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Refresh Characters", ""))
-        l6.addWidget(RCI_button)
+        self.RCI_button = QPushButton()
+        self.RCI_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Refresh Characters", ""))
+        l6.addWidget(self.RCI_button)
 
         layout.addLayout(l6)
 
         self.setLayout(layout)
 
-        start_button.pressed.connect(lambda: self.start_AI())
-        key_add_button.clicked.connect(lambda: self.create_AI())
-        key_edit_button.clicked.connect(lambda: self.modify_AI())
-        key_delete_button.clicked.connect(lambda: self.delete_AI())
-        key_change_button.clicked.connect(lambda: self.change_AI())
+        self.start_button.pressed.connect(lambda: self.start_AI())
+        self.key_add_button.clicked.connect(lambda: self.create_AI())
+        self.key_edit_button.clicked.connect(lambda: self.modify_AI())
+        self.key_delete_button.clicked.connect(lambda: self.delete_AI())
+        self.key_change_button.clicked.connect(lambda: self.change_AI())
 
-        SDRcheck.stateChanged.connect(lambda: signal_bus.settings_signal.emit("AI_save_state", SDRcheck.checkState()))
-        CDR_button.pressed.connect(lambda: db_delete_conversation_record(CDRint.value(), character=CNAME))
-        RCI_button.pressed.connect(lambda: db_load_character_intro(force_reload=True))
+        self.SDRcheck.stateChanged.connect(lambda: signal_bus.settings_signal.emit("AI_save_state", self.SDRcheck.checkState()))
+        self.CDR_button.pressed.connect(lambda: db_delete_conversation_record(self.CDRint.value(), character=CNAME))
+        self.RCI_button.pressed.connect(lambda: db_load_character_intro(force_reload=True))
 
         signal_bus.AI_settings_signal.connect(self.modify_key_table)
+        signal_bus.AI_started_signal.connect(self._started_AI)
 
     def modify_key_table(self, ori_name, new_name, inf_dict):
         if ori_name:
@@ -220,6 +221,13 @@ class AISettingsWindow(QDialog):
             from json import loads
             line0 = list(self.key_table_elements[0].items())[0]
             signal_bus.AI_start_signal.emit(line0[0], loads(line0[1]) if type(line0[1]) == str else line0[1])
+
+            self.start_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Starting...", ""))
+            self.start_button.setEnabled(False)
+
+    def _started_AI(self):
+        self.start_button.setText(GLOBAL_CONFIG.LANGUAGE.get("Start AI", ""))
+        self.start_button.setEnabled(True)
 
     def create_AI(self):
         from windows.AI_settings_operate_window import OperateAIWindow

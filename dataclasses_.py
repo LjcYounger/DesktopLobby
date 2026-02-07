@@ -25,7 +25,6 @@ class GlobalVariables:
     socket_thread: Any = None
 
     current_AI: Any = None
-    AI_thread: Any = None
 
 @dataclass
 class CharacterConfig:

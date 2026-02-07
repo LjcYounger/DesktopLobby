@@ -8,6 +8,8 @@ class SignalBus(QObject):
     dialog_anim_signal = Signal(str)  # ani_name
 
     AI_start_signal = Signal(str, object)  # name, inf_dict
+    AI_started_signal = Signal()
+    
     AI_generate_send_signal = Signal(object)  # dict
     AI_generate_get_signal = Signal(object)  # dict
     AI_dialog_input_signal = Signal(str)  # content

@@ -26,6 +26,7 @@
 
 #AI Settings Window
   "Start AI": "启动AI",
+  "Starting...": "启动中...",
   "Name": "名称",
   "Information": "信息",
   "<-Using": "<-正在使用",
